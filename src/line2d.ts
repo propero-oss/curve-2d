@@ -15,7 +15,7 @@ export class Line2d extends CurveBase2d {
     return this.start.distance(this.end);
   }
 
-  public getPercentageFn(precision?: number): (percent: number) => number {
+  public getPercentageFn(): (percent: number) => number {
     return (t) => t;
   }
 

@@ -1,4 +1,4 @@
-import { CurveBase2d, Vec2d, Vec2dLike } from "src/index";
+import { CurveBase2d, Vec2d } from "src/index";
 
 class CurveBase2dTest extends CurveBase2d {
   public clone(): this {
@@ -9,7 +9,7 @@ class CurveBase2dTest extends CurveBase2d {
     return new Vec2d(t, t);
   }
 
-  public getSegment(tStart: number, tEnd: number): CurveBase2d {
+  public getSegment(): CurveBase2d {
     return this;
   }
 
@@ -17,15 +17,15 @@ class CurveBase2dTest extends CurveBase2d {
     return this;
   }
 
-  public rotate(angle: number, origin?: Vec2dLike): this {
+  public rotate(): this {
     return this;
   }
 
-  public scale(factor: number, origin?: Vec2dLike): this {
+  public scale(): this {
     return this;
   }
 
-  public translate(vector: Vec2dLike): this {
+  public translate(): this {
     return this;
   }
 }
