@@ -31,7 +31,7 @@ export class Line2d extends CurveBase2d {
     return this.start.lerp(this.end, t);
   }
 
-  public getSegment(tStart: number, tEnd: number): CurveBase2d {
+  public getSegment(tStart: number, tEnd: number) {
     return new Line2d(this.get(tStart), this.get(tEnd));
   }
 
