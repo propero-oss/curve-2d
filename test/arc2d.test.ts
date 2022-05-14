@@ -1,4 +1,5 @@
 import { Arc2d, clampAngle, Vec2d, Vec2dLike } from "src/index";
+import { Line2d } from "src/line2d";
 import { vectorRoughlyEquals } from "test/util";
 
 function deg2rad(deg: number, radius = 1, origin?: Vec2dLike) {
@@ -101,15 +102,14 @@ describe("Arc2d", () => {
       );
       let deltaAngle = clampAngle(Math.abs(startAngle - endAngle));
       if (reverse) deltaAngle *= -1;
-      const angle = clampAngle(
-        startAngle + deltaAngle * (0.1 + Math.random() * 0.8)
-      );
+      const angle = clampAngle(startAngle + deltaAngle * 0.9);
       const [start, middle, end] = [
         Vec2d.fromAngle(startAngle, radius),
         Vec2d.fromAngle(angle, radius),
         Vec2d.fromAngle(endAngle, radius),
       ].map((point) => origin.add(point));
       const arc = Arc2d.fromPoints(start, middle, end) as Arc2d;
+      expect(arc).toBeInstanceOf(Arc2d);
       expect(arc["_radius"]).toBeCloseTo(reference["_radius"], 6);
       vectorRoughlyEquals(arc["_center"], reference["_center"]);
       expect(arc["_startAngle"]).toBeCloseTo(reference["_startAngle"], 6);
@@ -122,5 +122,18 @@ describe("Arc2d", () => {
     testArc(new Vec2d(0, 0), 5, 10, 25);
     testArc(new Vec2d(2, 5), 5, 10, 25);
     testArc(new Vec2d(2, 5), 5, 10, 25, false);
+  });
+  it("should instead calculate a line if three points are one a line", () => {
+    function testLine(start: Vec2d, end: Vec2d) {
+      const mid = start.lerp(end, 0.1 + Math.random() * 0.8);
+      const arc = Arc2d.fromPoints(start, mid, end) as Line2d;
+      const line = new Line2d(start, end);
+      expect(arc).toBeInstanceOf(Line2d);
+      vectorRoughlyEquals(arc.start, line.start);
+      vectorRoughlyEquals(arc.end, line.end);
+    }
+
+    testLine(new Vec2d(0, 0), new Vec2d(10, 15));
+    testLine(new Vec2d(1000, 0.002), new Vec2d(-1000, 0.003));
   });
 });

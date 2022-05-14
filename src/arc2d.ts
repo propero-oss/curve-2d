@@ -1,5 +1,6 @@
 import { CurveBase2d } from "src/curve-base2d";
-import { angleBetween, clampAngle } from "src/util";
+import { Line2d } from "src/line2d";
+import { angleBetween, clampAngle, clampModulo } from "src/util";
 // import { Line2d } from "src/line2d";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
@@ -120,6 +121,12 @@ export class Arc2d extends CurveBase2d {
     { x: x2, y: y2 }: Vec2dLike,
     { x: x3, y: y3 }: Vec2dLike
   ) {
+    const angle =
+      clampModulo(new Vec2d(x2 - x1, y2 - y1).angle, 0, PI) -
+      clampModulo(new Vec2d(x2 - x3, y2 - y3).angle, 0, PI);
+    if (abs(angle) < 0.000001 || abs(abs(angle) - PI) < 0.000001)
+      return new Line2d({ x: x1, y: y1 }, { x: x3, y: y3 });
+
     // snippet from https://www.geeksforgeeks.org/equation-of-circle-when-three-points-on-the-circle-are-given/
     const x12 = x1 - x2;
     const x13 = x1 - x3;
