@@ -17,5 +17,6 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.ts", "!**/node_modules/**"],
   coverageReporters: ["lcovonly"],
+  testRegex: ["/test/.*\\.test\\.ts$"],
   moduleNameMapper,
 };

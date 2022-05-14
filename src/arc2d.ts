@@ -120,6 +120,7 @@ export class Arc2d extends CurveBase2d {
     { x: x2, y: y2 }: Vec2dLike,
     { x: x3, y: y3 }: Vec2dLike
   ) {
+    // snippet from https://www.geeksforgeeks.org/equation-of-circle-when-three-points-on-the-circle-are-given/
     const x12 = x1 - x2;
     const x13 = x1 - x3;
 
@@ -132,10 +133,7 @@ export class Arc2d extends CurveBase2d {
     const x31 = x3 - x1;
     const x21 = x2 - x1;
 
-    //x1^2 - x3^2
     const sx13 = pow(x1, 2) - pow(x3, 2);
-
-    // y1^2 - y3^2
     const sy13 = pow(y1, 2) - pow(y3, 2);
 
     const sx21 = pow(x2, 2) - pow(x1, 2);
@@ -155,7 +153,6 @@ export class Arc2d extends CurveBase2d {
     // where centre is (h = -g, k = -f) and radius r
     // as r^2 = g^2 + f^2 - c
     const radius = sqrt(g * g + f * f - c);
-
     const center = new Vec2d(-g, -f);
 
     const angle1 = new Vec2d(x1, y1).subtract(center).angle;
