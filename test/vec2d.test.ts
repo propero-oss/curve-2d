@@ -1,4 +1,5 @@
 import { Vec2d } from "src/vec2d";
+import { vectorRoughlyEquals } from "test/util";
 
 function simple({ x, y }: Vec2d) {
   return { x, y };
@@ -9,13 +10,8 @@ const vectors = [
   new Vec2d(0.00000000001, -0.000000000233),
   new Vec2d(0, 0),
 ];
-const angles = [-1.10714871, 3.09870052, 0];
+const angles = [5.17603658, 3.09870052, 0];
 const lengths = [223.60679774, 2.332144935e-10, 0];
-
-function vectorRoughlyEquals(v1: Vec2d, v2: Vec2d) {
-  expect(v1.x).toBeCloseTo(v2.x, 6);
-  expect(v1.y).toBeCloseTo(v2.y, 6);
-}
 
 describe("Vec2d", () => {
   it("should be constructable", () => {

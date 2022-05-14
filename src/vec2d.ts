@@ -1,6 +1,7 @@
 import { lerp } from "src/util";
 
-const { atan2, sqrt, pow, cos, sin } = Math;
+const { atan2, sqrt, pow, cos, sin, PI } = Math;
+const taw = PI * 2;
 
 export interface Vec2dLike {
   x: number;
@@ -35,7 +36,8 @@ export class Vec2d {
   }
 
   public get angle(): number {
-    return atan2(this.x, this.y);
+    const angle = atan2(this.x, this.y);
+    return angle < 0 ? angle + taw : angle;
   }
 
   public set angle(val: number) {
