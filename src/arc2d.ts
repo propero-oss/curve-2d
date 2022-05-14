@@ -166,16 +166,4 @@ export class Arc2d extends CurveBase2d {
 
     return new Arc2d(center, radius, angle1, angle3, cc);
   }
-
-  protected static _intersectionSlope(
-    midA: Vec2d,
-    normA: Vec2d,
-    midB: Vec2d,
-    normB: Vec2d
-  ) {
-    const des = normA.x * normB.y - normA.y * normB.x;
-    if (abs(des) < 0.00001) return undefined;
-    const { x, y } = normA.multiplyAsymmetric(midB.subtract(midA));
-    return (x - y) / des;
-  }
 }
