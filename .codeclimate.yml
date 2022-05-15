@@ -43,6 +43,8 @@ plugins:
     enabled: true
   nodesecurity:
     enabled: true
+  eslint:
+    enabled: true
 
 exclude_patterns:
   - "**/dist/"
