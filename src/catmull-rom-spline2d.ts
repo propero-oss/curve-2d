@@ -2,7 +2,7 @@ import { Bezier2d } from "src/bezier2d";
 import { Curve2d } from "src/curve2d";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
-const { sqrt, pow } = Math;
+const { pow } = Math;
 
 export class CatmullRomSpline2d extends Curve2d {
   protected _alpha: number;
@@ -40,7 +40,7 @@ export class CatmullRomSpline2d extends Curve2d {
     const k3 = _knotInterval(p2, p3, _alpha) + k2;
 
     // get point
-    const u = (k2 - k1) * t * k1;
+    const u = (k2 - k1) * t + k1;
     const a1 = _remap(p0, p1, k0, k1, u);
     const a2 = _remap(p1, p2, k1, k2, u);
     const a3 = _remap(p2, p3, k2, k3, u);
@@ -72,8 +72,12 @@ export class CatmullRomSpline2d extends Curve2d {
     return new Bezier2d([p1, a0, a1, p2]);
   }
 
+  public beziers() {
+    return [this.bezier];
+  }
+
   private static _knotInterval(p1: Vec2d, p2: Vec2d, alpha: number): number {
-    return pow(sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2)), 0.5 * alpha);
+    return pow(p2.distance(p1), alpha);
   }
 
   private static _remap(
