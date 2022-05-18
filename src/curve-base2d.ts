@@ -121,6 +121,6 @@ export abstract class CurveBase2d {
 }
 
 export declare interface CurveBase2d {
-  catmull(precision?: number): Catmull2d;
-  beziers(precision?: number): Bezier2d[];
+  catmull(precision?: number, cache?: boolean): Catmull2d;
+  beziers(precision?: number, cache?: boolean): Bezier2d[];
 }

@@ -140,7 +140,8 @@ export class Bezier2d extends Curve2d {
 }
 
 CurveBase2d.prototype.beziers = function beziers(
-  precision?: number
+  precision?: number,
+  cache?: boolean
 ): Bezier2d[] {
-  return this.catmull(precision).beziers();
+  return this.catmull(precision, cache).beziers();
 };

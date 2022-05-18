@@ -8,8 +8,6 @@ export class PolyCurve2d<T extends CurveBase2d> extends CurveBase2d {
 
   constructor(curves: T[]) {
     super();
-    if (!curves.length)
-      throw new Error("At least one curve required for poly curve");
     this._curves = curves.map((curve) => curve.clone()) as T[];
   }
 

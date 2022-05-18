@@ -15,7 +15,6 @@ specifiers:
   '@types/jest': ^27.5.0
   '@typescript-eslint/eslint-plugin': ^5.22.0
   '@typescript-eslint/parser': ^5.22.0
-  '@wessberg/rollup-plugin-ts': ^2.0.4
   eslint: ^8.15.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.0.0
@@ -28,6 +27,7 @@ specifiers:
   rollup: ^2.72.1
   rollup-plugin-sourcemaps: ^0.6.3
   rollup-plugin-terser: ^7.0.2
+  rollup-plugin-ts: ^2.0.7
   rollup-plugin-ts-paths: ^1.0.5
   semantic-release: ^19.0.2
   ts-jest: ^28.0.1
@@ -48,7 +48,6 @@ devDependencies:
   '@types/jest': 27.5.0
   '@typescript-eslint/eslint-plugin': 5.22.0_6e9685ef9d35704ea65664d87fdd84d2
   '@typescript-eslint/parser': 5.22.0_eslint@8.15.0+typescript@4.6.3
-  '@wessberg/rollup-plugin-ts': 2.0.4_rollup@2.72.1+typescript@4.6.3
   eslint: 8.15.0
   eslint-config-prettier: 8.5.0_eslint@8.15.0
   eslint-plugin-prettier: 4.0.0_440b30a60bbe5bb6e3ad0057150b2782
@@ -61,6 +60,7 @@ devDependencies:
   rollup: 2.72.1
   rollup-plugin-sourcemaps: 0.6.3_rollup@2.72.1
   rollup-plugin-terser: 7.0.2_rollup@2.72.1
+  rollup-plugin-ts: 2.0.7_rollup@2.72.1+typescript@4.6.3
   rollup-plugin-ts-paths: 1.0.5
   semantic-release: 19.0.2
   ts-jest: 28.0.1_3101a8d36b7bde74424f7e6c49a60074
@@ -1466,46 +1466,6 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@wessberg/rollup-plugin-ts/2.0.4_rollup@2.72.1+typescript@4.6.3:
-    resolution: {integrity: sha512-+p5eRldRODlsCZs0vpBgl64jChzoxad0RxutvFGhhJyiXrN8lwewTo1MAwae/dsanK+L2WUCGZsMyxIYY8JGfA==}
-    engines: {node: '>=10.0.0', npm: '>=7.0.0', pnpm: '>=3.2.0', yarn: '>=1.13'}
-    peerDependencies:
-      '@babel/core': '>=6.x || >=7.x'
-      '@babel/plugin-transform-runtime': '>=6.x || >=7.x'
-      '@babel/preset-env': '>=6.x || >=7.x'
-      '@babel/runtime': '>=6.x || >=7.x'
-      '@swc/core': '>=1.x'
-      '@swc/helpers': '>=0.2'
-      rollup: '>=1.x || >=2.x'
-      typescript: '>=3.2.x || >= 4.x'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      '@babel/plugin-transform-runtime':
-        optional: true
-      '@babel/preset-env':
-        optional: true
-      '@babel/runtime':
-        optional: true
-      '@swc/core':
-        optional: true
-      '@swc/helpers':
-        optional: true
-    dependencies:
-      '@rollup/pluginutils': 4.2.1
-      '@wessberg/stringutil': 1.0.19
-      browserslist: 4.20.3
-      browserslist-generator: 1.0.66
-      chalk: 4.1.2
-      compatfactory: 0.0.12_typescript@4.6.3
-      crosspath: 1.0.0
-      magic-string: 0.25.9
-      rollup: 2.72.1
-      ts-clone-node: 0.3.32_typescript@4.6.3
-      tslib: 2.4.0
-      typescript: 4.6.3
-    dev: true
-
   /@wessberg/stringutil/1.0.19:
     resolution: {integrity: sha512-9AZHVXWlpN8Cn9k5BC/O0Dzb9E9xfEMXzYrNunwvkUTvuK7xgQPVRZpLo+jWCOZ5r8oBa8NIrHuPEu1hzbb6bg==}
     engines: {node: '>=8.0.0'}
@@ -2000,16 +1960,6 @@ packages:
     dependencies:
       array-ify: 1.0.0
       dot-prop: 5.3.0
-    dev: true
-
-  /compatfactory/0.0.12_typescript@4.6.3:
-    resolution: {integrity: sha512-DD5S1s2mIoVIpYfhCqNZPbOFlt9JDLkXc4d8fAZaeWWIsl7w3bmVS0HNlUkU2SB6iZOdXOjYZgeJZClmL1xnRg==}
-    engines: {node: '>=10.0.0'}
-    peerDependencies:
-      typescript: '>=3.x || >= 4.x'
-    dependencies:
-      helpertypes: 0.0.17
-      typescript: 4.6.3
     dev: true
 
   /compatfactory/0.0.13_typescript@4.6.3:
@@ -2817,11 +2767,6 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
-    dev: true
-
-  /helpertypes/0.0.17:
-    resolution: {integrity: sha512-muWKRSBsqN3MzqLdh82QfV7vWWwAYvHh3On87z898X+xZ5H2tPRQ5Y6hHA3BXSE+TueztA07iw5bInjwAT3x8A==}
-    engines: {node: '>=10.0.0'}
     dev: true
 
   /helpertypes/0.0.18:
@@ -3834,6 +3779,13 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
+  /magic-string/0.26.2:
+    resolution: {integrity: sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==}
+    engines: {node: '>=12'}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+
   /make-dir/3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
@@ -4595,6 +4547,46 @@ packages:
     dependencies:
       strip-bom: 4.0.0
       strip-json-comments: 3.1.1
+    dev: true
+
+  /rollup-plugin-ts/2.0.7_rollup@2.72.1+typescript@4.6.3:
+    resolution: {integrity: sha512-M9sppRKX6y/b2KXbGdUdHid0tshAEK/sEeYLBHBJiBa4swukSsoFVXKGGZasLcjaXhgUnnizFuvFFj6znxwvSA==}
+    engines: {node: '>=10.0.0', npm: '>=7.0.0', pnpm: '>=3.2.0', yarn: '>=1.13'}
+    peerDependencies:
+      '@babel/core': '>=6.x || >=7.x'
+      '@babel/plugin-transform-runtime': '>=6.x || >=7.x'
+      '@babel/preset-env': '>=6.x || >=7.x'
+      '@babel/runtime': '>=6.x || >=7.x'
+      '@swc/core': '>=1.x'
+      '@swc/helpers': '>=0.2'
+      rollup: '>=1.x || >=2.x'
+      typescript: '>=3.2.x || >= 4.x'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/plugin-transform-runtime':
+        optional: true
+      '@babel/preset-env':
+        optional: true
+      '@babel/runtime':
+        optional: true
+      '@swc/core':
+        optional: true
+      '@swc/helpers':
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 4.2.1
+      '@wessberg/stringutil': 1.0.19
+      browserslist: 4.20.3
+      browserslist-generator: 1.0.66
+      chalk: 4.1.2
+      compatfactory: 0.0.13_typescript@4.6.3
+      crosspath: 1.0.0
+      magic-string: 0.26.2
+      rollup: 2.72.1
+      ts-clone-node: 0.3.32_typescript@4.6.3
+      tslib: 2.4.0
+      typescript: 4.6.3
     dev: true
 
   /rollup/2.72.1:
