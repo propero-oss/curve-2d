@@ -64,5 +64,15 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "files": [
+    "src",
+    "dist",
+    "*.md",
+    ".gitignore"
+  ],
+  "directories": {
+    "lib": "dist",
+    "test": "test"
   }
 }
