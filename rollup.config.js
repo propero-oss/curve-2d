@@ -32,13 +32,30 @@ const banner = template(`
 /* eslint-disable */`, { variable: "p" })({ ...pkg, nameFormatted: name, year }).trim();
 /* eslint-enable */
 
-const outputs = [
-  { format: "cjs", file: main },
-  { format: "esm", file: module },
-].filter((it) => it);
+const live = process.env.ROLLUP_WATCH !== undefined;
+
+console.log(process.env);
+
+const cjs = { format: "cjs", file: main };
+const esm = { format: "esm", file: module };
+const dev = { format: "cjs", file: "public/main.js" };
+
+const outputs = live ? [dev] : [cjs, esm];
+
+const comments = (_, { value }) => /@preserve|@license|@cc_on/i.test(value);
+
+const plugins = [
+  sourcemaps(),
+  paths(),
+  commonjs(),
+  nodeResolve(),
+  json({ compact: true }),
+  ts({ tsconfig: live ? "tsconfig.build.json" : "tsconfig.json" }),
+];
+if (!live) plugins.push(terser({ output: { comments } }));
 
 export default {
-  input: "src/index.ts",
+  input: live ? "example/index.ts" : "src/index.ts",
   output: outputs.map(({ format, file }) => ({
     exports: "named",
     sourcemap: true,
@@ -52,18 +69,5 @@ export default {
   watch: {
     include: ["src/**/*", "example/**/*"],
   },
-  plugins: [
-    sourcemaps(),
-    paths(),
-    commonjs(),
-    nodeResolve(),
-    json({ compact: true }),
-    ts({ tsconfig: "tsconfig.build.json" }),
-    terser({
-      output: {
-        comments: (node, comment) =>
-          /@preserve|@license|@cc_on/i.test(comment.value),
-      },
-    }),
-  ],
+  plugins,
 };

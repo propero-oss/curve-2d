@@ -31,6 +31,7 @@ specifiers:
   rollup-plugin-ts-paths: ^1.0.5
   semantic-release: ^19.0.2
   ts-jest: ^28.0.1
+  tslib: ^2.4.0
   typescript: ^4.6.3
 
 devDependencies:
@@ -64,6 +65,7 @@ devDependencies:
   rollup-plugin-ts-paths: 1.0.5
   semantic-release: 19.0.2
   ts-jest: 28.0.1_3101a8d36b7bde74424f7e6c49a60074
+  tslib: 2.4.0
   typescript: 4.6.3
 
 packages:

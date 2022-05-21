@@ -1,11 +1,14 @@
 import { Bezier2d } from "src/bezier2d";
 import { Curve2d } from "src/curve2d";
+import { invalidatingAccessors } from "src/invalidating-accessors";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
 const { pow } = Math;
 
 export class CatmullRomSpline2d extends Curve2d {
+  @invalidatingAccessors("alpha")
   protected _alpha: number;
+  public alpha!: number;
 
   constructor(
     points: [Vec2dLike, Vec2dLike, Vec2dLike, Vec2dLike],
@@ -47,15 +50,6 @@ export class CatmullRomSpline2d extends Curve2d {
     const b1 = _remap(a1, a2, k0, k2, u);
     const b2 = _remap(a2, a3, k1, k3, u);
     return _remap(b1, b2, k1, k2, u);
-  }
-
-  public get alpha() {
-    return this._alpha;
-  }
-
-  public set alpha(value: number) {
-    this._alpha = value;
-    this.invalidate();
   }
 
   public getSegment(tStart: number, tEnd: number): Bezier2d {

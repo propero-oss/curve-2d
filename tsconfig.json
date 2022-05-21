@@ -21,7 +21,8 @@
       "node"
     ],
     "lib": [
-      "esnext"
+      "esnext",
+      "dom"
     ],
     "paths": {
       "src/*": ["./src/*"],

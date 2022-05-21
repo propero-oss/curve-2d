@@ -1,12 +1,15 @@
 import { CurveBase2d } from "src/curve-base2d";
+import { invalidatingPoints } from "src/invalidating-accessors";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
 export abstract class Curve2d extends CurveBase2d {
+  @invalidatingPoints("points")
   protected _points!: Vec2d[];
+  public points!: Vec2d[];
 
   protected constructor(points: Vec2dLike[]) {
     super();
-    this.points = points;
+    this.points = points as Vec2d[];
   }
 
   public reverse() {
@@ -32,15 +35,6 @@ export abstract class Curve2d extends CurveBase2d {
     copy.points = copy.points.map((point) => point.add(vector));
     copy.invalidate();
     return copy;
-  }
-
-  public get points(): Vec2d[] {
-    return this._points?.slice() ?? [];
-  }
-
-  public set points(points: Vec2dLike[]) {
-    this._points = points.map((point) => new Vec2d(point));
-    this.invalidate();
   }
 
   protected _applyReverse(curve: this) {

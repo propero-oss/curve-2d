@@ -1,18 +1,36 @@
 import { CurveBase2d } from "src/curve-base2d";
+import {
+  invalidatingAccessors,
+  invalidatingAngle,
+  invalidatingPoint,
+} from "src/invalidating-accessors";
 import { Line2d } from "src/line2d";
 import { angleBetween, clampAngle, clampModulo } from "src/util";
-// import { Line2d } from "src/line2d";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
 const { abs, pow, sqrt, PI } = Math;
 const taw = PI * 2;
 
 export class Arc2d extends CurveBase2d {
+  @invalidatingPoint("center")
   protected _center: Vec2d;
+  public center!: Vec2d;
+
+  @invalidatingAngle("startAngle")
   protected _startAngle: number;
+  public startAngle!: number;
+
+  @invalidatingAngle("endAngle")
   protected _endAngle: number;
+  public endAngle!: number;
+
+  @invalidatingAccessors("radius")
   protected _radius: number;
+  public radius!: number;
+
+  @invalidatingAccessors("counterClockwise")
   protected _counterClockwise: boolean;
+  public counterClockwise!: boolean;
 
   constructor(
     center: Vec2dLike,
