@@ -23,7 +23,7 @@ const name = formatModule(pkg.name);
 /* eslint-disable */
 const banner = template(`
 /**
- * <%= p.nameFormatted %> (<%= p.name %> v<%= p.version %>)
+ * <%= p.nameFormatted %> (<%= p.name %>)
  * <%= p.description %>
  * <%= p.homepage %>
  * (c) <%= p.year %> <%= p.author %>
@@ -33,8 +33,6 @@ const banner = template(`
 /* eslint-enable */
 
 const live = process.env.ROLLUP_WATCH !== undefined;
-
-console.log(process.env);
 
 const cjs = { format: "cjs", file: main };
 const esm = { format: "esm", file: module };

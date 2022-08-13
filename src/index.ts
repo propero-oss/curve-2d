@@ -8,3 +8,4 @@ export * from "./catmull2d";
 export * from "./catmull-rom-spline2d";
 export * from "./poly-curve2d";
 export * from "./util";
+import "./avoid-circular-dependencies-extensions";

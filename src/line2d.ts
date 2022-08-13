@@ -17,6 +17,12 @@ export class Line2d extends CurveBase2d {
     this._end = new Vec2d(end);
   }
 
+  public tangent(t: number) {
+    const p0 = this.get(t);
+    const p1 = p0.add(this._end.subtract(this._start));
+    return new Line2d(p0, p1);
+  }
+
   public length(): number {
     return this._start.distance(this._end);
   }
@@ -61,5 +67,9 @@ export class Line2d extends CurveBase2d {
 
   public translate(vector: Vec2dLike): this {
     return new Line2d(this._start.add(vector), this._end.add(vector)) as this;
+  }
+
+  public get direction(): Vec2d {
+    return this._end.subtract(this._start);
   }
 }

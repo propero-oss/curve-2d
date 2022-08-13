@@ -1,4 +1,4 @@
-import { CurveBase2d } from "src/curve-base2d";
+import { Catmull2d } from "src/catmull2d";
 import { Curve2d } from "src/curve2d";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
@@ -75,12 +75,12 @@ export class Bezier2d extends Curve2d {
     return super.length(precision);
   }
 
-  public catmull(precision: number = this._points.length + 2) {
+  public catmull(precision: number = this._points.length + 2): Catmull2d {
     return super.catmull(precision);
   }
 
   public simplify(precision?: number): Bezier2d[] {
-    return this.beziers(precision);
+    return (this as any).beziers(precision);
   }
 
   private static _getQuadratic(p0: Vec2d, p1: Vec2d, p2: Vec2d, t: number) {
@@ -138,10 +138,3 @@ export class Bezier2d extends Curve2d {
     return p;
   }
 }
-
-CurveBase2d.prototype.beziers = function beziers(
-  precision?: number,
-  cache?: boolean
-): Bezier2d[] {
-  return this.catmull(precision, cache).beziers();
-};

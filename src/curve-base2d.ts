@@ -1,5 +1,6 @@
 import type { Bezier2d } from "src/bezier2d";
 import type { Catmull2d } from "src/catmull2d";
+import type { Line2d } from "src/line2d";
 import { lerp } from "src/util";
 import { Vec2d, Vec2dLike } from "src/vec2d";
 
@@ -120,7 +121,8 @@ export abstract class CurveBase2d {
   }
 }
 
-export declare interface CurveBase2d {
+export interface CurveBase2d {
   catmull(precision?: number, cache?: boolean): Catmull2d;
   beziers(precision?: number, cache?: boolean): Bezier2d[];
+  tangent(t: number, threshold?: number): Line2d;
 }

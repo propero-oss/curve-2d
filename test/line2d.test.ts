@@ -1,4 +1,5 @@
-import { Line2d, Vec2d } from "src/index";
+import { Line2d } from "src/line2d";
+import { Vec2d } from "src/vec2d";
 import { vectorRoughlyEquals } from "test/util";
 
 describe("Line2d", () => {
@@ -69,5 +70,11 @@ describe("Line2d", () => {
     const translated = line.translate(offset);
     for (let i = 0; i <= 1; i += 0.1)
       vectorRoughlyEquals(translated.get(i), line.get(i).add(offset));
+  });
+  it("should calculate a tangent", () => {
+    const line = new Line2d({ x: 0, y: 0 }, { x: 3, y: 4 });
+    const { start, direction } = line.tangent(0.5);
+    vectorRoughlyEquals(start, { x: 1.5, y: 2 });
+    vectorRoughlyEquals(direction, { x: 3, y: 4 });
   });
 });

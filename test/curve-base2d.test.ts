@@ -1,4 +1,5 @@
 import { CurveBase2d, Vec2d } from "src/index";
+import { vectorRoughlyEquals } from "test/util";
 
 class CurveBase2dTest extends CurveBase2d {
   public clone(): this {
@@ -88,5 +89,11 @@ describe("CurveBase2d", () => {
     expect(d["_length"]).toEqual(c["_length"]);
     expect(d["_percentFn"]!(0.2)).toBeCloseTo(c["_percentFn"]!(0.2), 6);
     expect(d["_lut"]![0]).toEqual(c["_lut"]![2]);
+  });
+  it("should get the tangent of a curve", () => {
+    const c = new CurveBase2dTest();
+    const { start, direction } = c.tangent(0.3);
+    vectorRoughlyEquals(start, { x: 0.3, y: 0.3 });
+    vectorRoughlyEquals(direction, { x: 1, y: 1 });
   });
 });

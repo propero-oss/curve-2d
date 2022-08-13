@@ -1,7 +1,4 @@
-import { Arc2d } from "src/arc2d";
-import { Catmull2d } from "src/catmull2d";
-import { PolyCurve2d } from "src/poly-curve2d";
-import { Vec2d } from "src/vec2d";
+import { Arc2d, Catmull2d, PolyCurve2d, Vec2d } from "src/index";
 import { curveRoughlyEquals, range, vectorsRoughlyEqual } from "test/util";
 
 const examplePoints = [

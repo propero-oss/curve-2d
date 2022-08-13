@@ -1,3 +1,4 @@
+import { Bezier2d } from "src/bezier2d";
 import { CatmullRomSpline2d } from "src/catmull-rom-spline2d";
 import { CurveBase2d } from "src/curve-base2d";
 import { PolyCurve2d } from "src/poly-curve2d";
@@ -29,11 +30,11 @@ export class Catmull2d extends PolyCurve2d<CatmullRomSpline2d> {
     this.invalidate();
   }
 
-  public catmull() {
+  public catmull(): Catmull2d {
     return this;
   }
 
-  public beziers() {
+  public beziers(): Bezier2d[] {
     return this._curves.map((curve) => curve.bezier);
   }
 
@@ -60,10 +61,3 @@ export class Catmull2d extends PolyCurve2d<CatmullRomSpline2d> {
     return Catmull2d.fromPointsOnCurve(curve.getLut(precision, cache));
   }
 }
-
-CurveBase2d.prototype.catmull = function catmull(
-  precision?: number,
-  cache?: boolean
-) {
-  return Catmull2d.fromCurve(this, precision, cache);
-};

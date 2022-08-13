@@ -66,7 +66,7 @@ export class CatmullRomSpline2d extends Curve2d {
     return new Bezier2d([p1, a0, a1, p2]);
   }
 
-  public beziers() {
+  public beziers(): Bezier2d[] {
     return [this.bezier];
   }
 

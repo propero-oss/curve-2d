@@ -1,8 +1,9 @@
 import { CurveBase2d } from "src/curve-base2d";
-import { Vec2d } from "src/vec2d";
+import { Vec2d, Vec2dLike } from "src/vec2d";
 
-export function vectorRoughlyEquals(v1: Vec2d, v2: Vec2d, numDigits = 6) {
-  expect(v1.distance(v2)).toBeCloseTo(0, numDigits);
+export function vectorRoughlyEquals(v1: Vec2d, v2: Vec2dLike, numDigits = 6) {
+  expect(v1.x).toBeCloseTo(v2.x, numDigits);
+  expect(v1.y).toBeCloseTo(v2.y, numDigits);
 }
 
 export function vectorsRoughlyEqual(
